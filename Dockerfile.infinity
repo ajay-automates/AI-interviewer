@@ -1,0 +1,5 @@
+FROM infiniflow/infinity:v0.7.0-dev2
+
+COPY docker/infinity_conf.toml /infinity_conf.toml
+
+CMD ["-f", "/infinity_conf.toml"]
