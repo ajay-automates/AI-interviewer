@@ -1,0 +1,16 @@
+FROM infiniflow/ragflow:v0.24.0
+
+USER root
+
+# Copy our customized configuration and entrypoint
+COPY docker/service_conf.yaml.template /ragflow/conf/service_conf.yaml.template
+COPY docker/entrypoint.sh /ragflow/entrypoint.sh
+
+# Ensure entrypoint is executable
+RUN chmod +x /ragflow/entrypoint.sh
+
+# Expose the ports (standard RAGFlow ports)
+EXPOSE 80 443 9380 9381 9382
+
+# Use the same entrypoint as the original image, but pointing to our copy
+ENTRYPOINT ["/ragflow/entrypoint.sh"]
